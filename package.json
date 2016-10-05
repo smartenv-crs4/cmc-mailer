@@ -1,0 +1,27 @@
+{
+  "name": "mailer-service",
+  "version": "1.0.0",
+  "description": "A simple microservice to send emails, Web API included",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "npm test"
+  },
+  "keywords": [
+    "email",
+    "mailer",
+    "smtp",
+    "API",
+    "microservice"
+  ],
+  "author": "Antonio Pintus",
+  "license": "MIT",
+  "dependencies": {
+    "boom": "^3.2.2",
+    "config": "^1.21.0",
+    "hapi": "^13.4.0",
+    "nodemailer": "^2.4.1",
+    "request-promise": "^3.0.0",
+    "validator": "^5.4.0"
+  }
+}

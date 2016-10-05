@@ -1,0 +1,22 @@
+{
+  "service": {
+    "validator":"http://156.148.37.152:3000/decodeToken",
+    "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg0NDg2NDc3ODI2fQ.SbgJdhUC1gnPsuamRxpg_SHvUyfyts-j7e3HxzmYqzU",
+    "templates": {
+      "prova1": {
+        "subject":"test template",
+        "text":"template di prova {{body}}",
+        "html":"<h1>Template CagliariPort 2020</h1><p>{{body}}</p><p style='font:italic 9px;color:lightgrey;'>Esempio footer</p>",
+        "from":"cport2020@gmail.com"
+      }
+    }
+  }
+}
+/*
+  "smtp": {
+    "host":"smtp.gmail.com",
+    "ssl":"true",
+    "user":"cport2020",
+    "passwd":"22022016"
+  }
+*/
