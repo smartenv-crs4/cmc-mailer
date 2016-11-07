@@ -1,7 +1,16 @@
 {
-  "service": {
-    "validator":"http://156.148.37.152:3000/decodeToken",
-    "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg0NDg2NDc3ODI2fQ.SbgJdhUC1gnPsuamRxpg_SHvUyfyts-j7e3HxzmYqzU",
+  "production": { 
+    "smtp": {
+      "host":"smtp.gmail.com",
+      "ssl":"true",
+      "user":"cport2020",
+      "passwd":"22022016"
+    },
+    "security": {
+      "authoritationMicroserviceUrl": "http://156.148.36.184:3005",
+      "decodedTokenFieldName": "contentms",
+      "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzkyMjM0MjYyOTAzfQ.tp79MBMuxZmiw7Tz5fyOVmfW91Pa3MsqoAww_0wF6FE"    
+    },
     "templates": {
       "prova1": {
         "subject":"test template",
@@ -12,11 +21,3 @@
     }
   }
 }
-/*
-  "smtp": {
-    "host":"smtp.gmail.com",
-    "ssl":"true",
-    "user":"cport2020",
-    "passwd":"22022016"
-  }
-*/

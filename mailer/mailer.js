@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const mailerConfig = require('propertiesmanager').conf;
 
 const poolConfig = {
     pool: true,
