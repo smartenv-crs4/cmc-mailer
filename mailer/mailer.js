@@ -3,21 +3,21 @@ const mailerConfig = require('propertiesmanager').conf;
 
 const poolConfig = {
     pool: true,
-    host: mailerConfig.smtp,
+    host: mailerConfig.smtp.host,
     port: 465,
-    secure: Boolean(mailerConfig.secure), // use SSL
+    secure: Boolean(mailerConfig.smtp.ssl), // use SSL
     auth: {
-        user:  mailerConfig.user,
-        pass:  mailerConfig.passwd
+        user:  mailerConfig.smtp.user,
+        pass:  mailerConfig.smtp.passwd
     }
 };
 
 
-let transporter = nodemailer.createTransport(poolConfig);
     
 function sendMail (email, cb) {
+
     let mailOptions = {
-        from: email.from || mailerConfig.user, // sender address
+        from: email.from || mailerConfig.smtp.user, // sender address
         to: email.to || [], // list of receivers
         subject: email.subject || '' // Subject line
     };
@@ -32,7 +32,8 @@ function sendMail (email, cb) {
     if (email.template !== undefined && email.template !== '') {
         var template = mailerConfig.templates[email.template];
         if (template !== undefined) {
-            var send = transporter.templateSender(template);
+            let transporter = nodemailer.createTransport(poolConfig);
+            let send = transporter.templateSender(template);
             send(mailOptions, {body: email.textBody},
                 function (err, info) {
                     if (err) {
@@ -43,6 +44,7 @@ function sendMail (email, cb) {
                 }
             )
         }
+        else return cb('template not found');
     }
     else {
         // send mail with defined transport object

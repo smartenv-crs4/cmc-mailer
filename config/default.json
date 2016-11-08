@@ -12,7 +12,7 @@
       "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzkyMjM0MjYyOTAzfQ.tp79MBMuxZmiw7Tz5fyOVmfW91Pa3MsqoAww_0wF6FE"    
     },
     "templates": {
-      "prova1": {
+      "template1": {
         "subject":"test template",
         "text":"template di prova {{body}}",
         "html":"<h1>Template CagliariPort 2020</h1><p>{{body}}</p><p style='font:italic 9px;color:lightgrey;'>Esempio footer</p>",

@@ -15,7 +15,7 @@ auth.configure(config.security)
 function authWrap(req, res, next) {
   if(!req.app.get("nocheck"))
     auth.checkAuthorization(req, res, next);
-  next();
+  else next();
 }
 
 
@@ -49,7 +49,7 @@ function authWrap(req, res, next) {
   *
   */
 router.post('/email', authWrap, (req, res, next) => {
-  var mail = req.payload;
+  var mail = req.body;
   for(var rec in mail.to) {
     if(!validator.isEmail(mail.to[rec])) {
       res.boom.badRequest('invalid recipient mail address');

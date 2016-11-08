@@ -5,13 +5,34 @@ const baseUrl = "http://localhost:" + port;
 const prefix = '/api/v1/';
 const request = supertest.agent(baseUrl);
 const version = require('../package.json').version;
+const validator = require('validator');
 
 process.env.NODE_ENV='test'; //WARNING testing in test mode, no token check
 
 const init = require('../lib/init');
 
+function usage() {  
+  console.log("ERROR: Please, insert a valid receiver email address for this test");
+  console.log("       use: npm test -- --sendto=your@email.com");
+  console.log("       You'll receive a test email from the service to this address");
+  process.exit();
+}
+
 describe('--- Testing Mailer ---', () => {
+  var email = {
+    from:{"name":"cagliari port 2020", "address":"cport2020@gmail.com"},
+    to:[],
+    subject:"[CAPORT2002] Mailer Microservice test",
+    textBody:"Hello Dear, this is a simple newsletter test.",
+    template:"template1"
+  }
+
   before((done) => {
+    var dest = process.argv[3];
+    if(!dest) usage(); 
+    dest = dest.split('=');
+    if(dest[0] !== '--sendto' || !validator.isEmail(dest[1])) usage();
+    email.to.push(dest[1]);
     init.start(() => {done()});
   });
 
@@ -20,21 +41,33 @@ describe('--- Testing Mailer ---', () => {
     init.stop(() => {done()});
   });
 
-/*
+
   describe('POST /email/', () => {
-    it('respond with json Object containing the id of the stored resource', (done) => {
+
+    it('respond with 200 status code', (done) => {
       request
-        .post( prefix + 'file')
-        .expect('Content-Type', /json/)
+        .post( prefix + 'email')
+        .send(email)
         .expect(200)
-        .end((req,res) => {
-          res.body.should.have.property("failed");
-          res.body.failed.length.should.be.equal(0);
-          done();
+        .end((err, res) => {
+          if(err) done(err);
+          else done();
+        });
+    });
+    
+    it('respond with a badRequest error (invalid email address)', (done) => {
+      email.to[0] = "aaa";
+      request
+        .post( prefix + 'email')
+        .send(email)
+        .expect(400)
+        .end((err,res) => {
+          if(err) done(err);
+          else done();
         });
     });
   });
-*/
+
 
   describe('GET /version', () => {
     it('respond with the version present in package.json', (done) => {
@@ -42,10 +75,13 @@ describe('--- Testing Mailer ---', () => {
         .get(prefix + 'version') 
         .expect('Content-Type', /json/)
         .expect(200)
-        .end((req,res) => {
-          res.body.should.have.property('version');
-          res.body.version.should.be.equal(version);
-          done();
+        .end((err,res) => {
+          if(err) done(err);
+          else {
+            res.body.should.have.property('version');
+            res.body.version.should.be.equal(version);
+            done();
+          }
         });
     });
   });
