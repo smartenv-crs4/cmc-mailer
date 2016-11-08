@@ -28,11 +28,16 @@ describe('--- Testing Mailer ---', () => {
   }
 
   before((done) => {
-    var dest = process.argv[3];
-    if(!dest) usage(); 
-    dest = dest.split('=');
-    if(dest[0] !== '--sendto' || !validator.isEmail(dest[1])) usage();
-    email.to.push(dest[1]);
+    let dest = undefined;
+    for(arg in process.argv) {
+      if(process.argv[arg].startsWith('--sendto')) {
+        dest = process.argv[arg].split('=')[1];
+        if(!validator.isEmail(dest)) usage();
+        break;
+      }
+    }
+    if(dest) email.to.push(dest);
+    else usage();
     init.start(() => {done()});
   });
 
