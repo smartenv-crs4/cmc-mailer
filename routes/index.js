@@ -7,9 +7,13 @@ const version = require('../package.json').version;
 const config = require('propertiesmanager').conf; 
 
 const auth = require('tokenmanager');
-const authField = config.security.decodedTokenFieldName;
+const authField = config.decodedTokenFieldName;
 
-auth.configure(config.security)
+auth.configure({
+  authoritationMicroserviceUrl:config.authHost,
+  decodedTokenFieldName:authField,
+  access_token:config.access_token
+})
 
 //authms middleware wrapper for dev environment (no authms required)
 function authWrap(req, res, next) {
