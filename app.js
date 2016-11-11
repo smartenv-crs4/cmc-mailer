@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var boom = require('express-boom');
+var config = require('propertiesmanager').conf;
 var app = express();
 
 let prefix = '/api/v1'; //TODO gestire meglio
@@ -20,6 +21,16 @@ app.use(boom());
 if (app.get('env') === 'dev' || app.get('env') === 'test' ) {
   app.set('nocheck', true);
   console.log("INFO: Development/test mode, skipping token checks"); 
+}
+
+if(config.enableCors === true) {
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, Accept, Content-Type, Authorization, Content-Length, X-Requested-With');
+    if ('OPTIONS' == req.method) res.send(200);
+    else next();
+  });
 }
 
 app.use(prefix, routes);
