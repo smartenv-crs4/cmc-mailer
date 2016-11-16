@@ -10,7 +10,7 @@ const auth = require('tokenmanager');
 const authField = config.decodedTokenFieldName;
 
 auth.configure({
-  authoritationMicroserviceUrl:config.authHost,
+  authoritationMicroserviceUrl:config.authProtocol + "://" + config.authHost + ":" + config.authPort,
   decodedTokenFieldName:authField,
   access_token:config.access_token
 })
