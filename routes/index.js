@@ -12,7 +12,7 @@ const authField = config.decodedTokenFieldName;
 auth.configure({
   authoritationMicroserviceUrl:config.authProtocol + "://" + config.authHost + ":" + config.authPort,
   decodedTokenFieldName:authField,
-  access_token:config.access_token
+  access_token:config.auth_token
 })
 
 //authms middleware wrapper for dev environment (no authms required)
