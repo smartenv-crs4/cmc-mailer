@@ -1,8 +1,7 @@
 const supertest = require('supertest');
 const should = require('should');
 const port = process.env.PORT || 3000;
-const baseUrl = "http://localhost:" + port;
-const prefix = '/api/v1/';
+const baseUrl = "http://localhost:" + port + '/';
 const request = supertest.agent(baseUrl);
 const version = require('../package.json').version;
 const validator = require('validator');
@@ -46,12 +45,27 @@ describe('--- Testing Mailer ---', () => {
     init.stop(() => {done()});
   });
 
+  describe('GET /', () => {
+    it('respond with json Object containing ms name and version ', (done) => {
+      request
+        .get('')
+        .expect(200)
+        .end((err,res) => {
+          if(err) done(err);
+          else {
+            res.body.should.have.property("ms");
+            res.body.should.have.property("version");
+            done();
+          }
+        });
+    });
+  });
+
 
   describe('POST /email/', () => {
-
     it('respond with 200 status code', (done) => {
       request
-        .post( prefix + 'email')
+        .post('email')
         .send(email)
         .expect(200)
         .end((err, res) => {
@@ -63,7 +77,7 @@ describe('--- Testing Mailer ---', () => {
     it('respond with a badRequest error (invalid email address)', (done) => {
       email.to[0] = "aaa";
       request
-        .post( prefix + 'email')
+        .post('email')
         .send(email)
         .expect(400)
         .end((err,res) => {
@@ -73,21 +87,4 @@ describe('--- Testing Mailer ---', () => {
     });
   });
 
-
-  describe('GET /version', () => {
-    it('respond with the version present in package.json', (done) => {
-      request
-        .get(prefix + 'version') 
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .end((err,res) => {
-          if(err) done(err);
-          else {
-            res.body.should.have.property('version');
-            res.body.version.should.be.equal(version);
-            done();
-          }
-        });
-    });
-  });
 });

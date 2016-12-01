@@ -8,8 +8,6 @@ var boom = require('express-boom');
 var config = require('propertiesmanager').conf;
 var app = express();
 
-let prefix = '/api/v1'; //TODO gestire meglio
-
 if(app.get('env') != 'test') {
   app.use(logger('dev'));
 }
@@ -33,7 +31,7 @@ if(config.enableCors === true) {
   });
 }
 
-app.use(prefix, routes);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
