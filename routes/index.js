@@ -23,7 +23,7 @@ function authWrap(req, res, next) {
 }
 
 
-router.get("/", authWrap, (req, res, next) => {res.json({ms:"CAPORT2020 Mailer microservice", version:require('../package.json').version})});
+router.get("/", (req, res, next) => {res.json({ms:"CAPORT2020 Mailer microservice", version:require('../package.json').version})});
 
 /**
   * @api {post} /email Sends an email
