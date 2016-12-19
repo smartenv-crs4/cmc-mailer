@@ -9,9 +9,11 @@
     "enableCors":true,
     "authProtocol":"http",
     "authHost":"your_auth_service_host",
-    "authPort":"3000",
-    "decodedTokenFieldName": "mailerms",
+    "authPort":"80",
+    "apiGwAuthBaseUrl":"/api/auth",
+    "apiVersion":"v1",
     "auth_token":"your_auth_service_token",
+    "decodedTokenFieldName": "mailerms",
     "templates": {
       "template1": {
         "subject":"test template",
