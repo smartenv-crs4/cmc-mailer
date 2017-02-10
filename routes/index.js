@@ -4,13 +4,17 @@ var router = express.Router();
 const mailer = require('../mailer/mailer');
 const validator = require('validator');
 const version = require('../package.json').version;
-const config = require('propertiesmanager').conf; 
+const config = require('propertiesmanager').conf;
+var _=require('underscore');
 
 const auth = require('tokenmanager');
 const authField = config.decodedTokenFieldName;
 
+var gwBase=_.isEmpty(config.apiGwAuthBaseUrl) ? "" : config.apiGwAuthBaseUrl;
+gwBase=_.isEmpty(config.apiVersion) ? gwBase : gwBase + "/" + config.apiVersion;
+
 auth.configure({
-  authoritationMicroserviceUrl:config.authProtocol + "://" + config.authHost + ":" + config.authPort + config.apiGwAuthBaseUrl + "/" + config.apiVersion,
+  authoritationMicroserviceUrl:config.authProtocol + "://" + config.authHost + ":" + config.authPort + gwBase,
   decodedTokenFieldName:authField,
   access_token:config.auth_token
 })
