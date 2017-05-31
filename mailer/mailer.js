@@ -16,6 +16,8 @@ const poolConfig = {
     
 function sendMail (email, cb) {
 
+
+
     let mailOptions = {
         from: email.from || mailerConfig.smtp.user, // sender address
         to: email.to || [], // list of receivers
@@ -48,6 +50,8 @@ function sendMail (email, cb) {
     }
     else {
         // send mail with defined transport object
+        console.log("#########################Send Email without template");
+        let transporter = nodemailer.createTransport(poolConfig);
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);

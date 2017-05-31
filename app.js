@@ -14,6 +14,7 @@ if(app.get('env') != 'test') {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/doc', express.static('doc',{root:'doc'}));
 app.use(boom());
 
 if (app.get('env') === 'dev' || app.get('env') === 'test' ) {

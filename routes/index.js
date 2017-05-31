@@ -17,7 +17,7 @@ auth.configure({
   authorizationMicroserviceUrl:config.authProtocol + "://" + config.authHost + ":" + config.authPort + gwBase + '/tokenactions/checkiftokenisauth',
   decodedTokenFieldName:authField,
   authorizationMicroserviceToken:config.auth_token
-})
+});
 
 //authms middleware wrapper for dev environment (no authms required)
 function authWrap(req, res, next) {
@@ -60,18 +60,23 @@ router.get("/", (req, res, next) => {res.json({ms:"CAPORT2020 Mailer microservic
   */
 router.post('/email', authWrap, (req, res, next) => {
   var mail = req.body;
+
   for(var rec in mail.to) {
     if(!validator.isEmail(mail.to[rec])) {
       res.boom.badRequest('invalid recipient mail address');
       return;
     }
   }
+
+
   if(!validator.isEmail(mail.from.address)) {
     res.boom.badRequest('invalid sender mail address');
     return;
   }
+    console.log(mail.from);
 
   mailer.sendMail(mail, (err, mess) => {
+    console.log("Send Mail Callback");
     if(err) {
       res.boom.badImplementation(); 
       return;
