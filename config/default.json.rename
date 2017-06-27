@@ -1,25 +1,21 @@
 {
   "production": { 
     "smtp": {
-      "host":"smtp.gmail.com",
+      "host":"your_smtp_host",
       "ssl":"true",
-      "user":"cport2020",
-      "passwd":"22022016"
+      "user":"your_smtp_account_username",
+      "passwd":"your_smtp_account_password"
     },
     "enableCors":true,
-    "authProtocol":"http",
-    "authHost":"your_auth_service_host",
-    "authPort":"3000",
-    "apiGwAuthBaseUrl":"",
-    "apiVersion":"",
+    "authUrl":"your_auth_service_url",
     "auth_token":"your_auth_service_token",
     "decodedTokenFieldName": "mailerms",
     "templates": {
       "template1": {
         "subject":"test template",
         "text":"template di prova {{body}}",
-        "html":"<h1>Template CagliariPort 2020</h1><p>{{body}}</p><p style='font:italic 9px;color:lightgrey;'>Esempio footer</p>",
-        "from":"cport2020@gmail.com"
+        "html":"<h1>Template CMC Core</h1><p>{{body}}</p><p style='font:italic 9px;color:lightgrey;'>Esempio footer</p>",
+        "from":"your_from_email_address"
       }
     }
   }

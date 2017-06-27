@@ -1,3 +1,26 @@
+/*
+ ############################################################################
+ ############################### GPL III ####################################
+ ############################################################################
+ *                         Copyright 2017 CRS4                                 *
+ *    This file is part of CRS4 Microservice Core - Mailer (CMC-Mailer).      *
+ *                                                                            *
+ *     CMC-Mailer is free software: you can redistribute it and/or modify     *
+ *     it under the terms of the GNU General Public License as published by   *
+ *       the Free Software Foundation, either version 3 of the License, or    *
+ *                    (at your option) any later version.                     *
+ *                                                                            *
+ *     CMC-Mailer is distributed in the hope that it will be useful,          *
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        *
+ *               GNU General Public License for more details.                 *
+ *                                                                            *
+ *     You should have received a copy of the GNU General Public License      *
+ *    along with CMC-Maileer.  If not, see <http://www.gnu.org/licenses/>.    *
+ * ############################################################################
+ */
+
+
 const supertest = require('supertest');
 const should = require('should');
 const port = process.env.PORT || 3000;
@@ -5,6 +28,7 @@ const baseUrl = "http://localhost:" + port + '/';
 const request = supertest.agent(baseUrl);
 const version = require('../package.json').version;
 const validator = require('validator');
+const conf=require('../config/default.json');
 
 process.env.NODE_ENV='test'; //WARNING testing in test mode, no token check
 
@@ -19,9 +43,9 @@ function usage() {
 
 describe('--- Testing Mailer ---', () => {
   var email = {
-    from:{"name":"cagliari port 2020", "address":"cport2020@gmail.com"},
+    from:{"name":"CMC Mailer Microservice", "address":conf.production.templates.template1.from},
     to:[],
-    subject:"[CAPORT2002] Mailer Microservice test",
+    subject:"[CMC Mailer] Mailer Microservice test",
     textBody:"Hello Dear, this is a simple newsletter test.",
     template:"template1"
   }

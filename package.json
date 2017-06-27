@@ -6,16 +6,6 @@
     "start": "node ./bin/www",
     "test": "mocha ./test/"
   },
-  "author": {
-    "name": "Antonio Pintus",
-    "email": "pintux@crs4.it"
-  },
-  "contributors": [
-    {
-      "name": "Dino Soru",
-      "email": "dino@crs4.it"
-    }
-  ],
   "dependencies": {
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
