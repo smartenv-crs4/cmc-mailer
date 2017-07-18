@@ -1,0 +1,13 @@
+{
+  "name": "CMC (CRS4 Microservice Core) Mailer API",
+  "description": "APIs to handle messaging functions",
+  "url": "http://smartapi.crs4.it/api/mailer/v1",
+  "header": {
+    "title": "API Overview",
+    "filename": "header.md"
+  },
+  "footer": {
+    "title": "Maintained by CRS4",
+    "filename": "footer.md"
+  }
+}
