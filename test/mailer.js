@@ -66,7 +66,7 @@ describe('--- Testing Mailer ---', () => {
 
 
   after((done) => {
-    init.stop(() => {done()});
+    init.stop(done);
   });
 
   describe('GET /', () => {

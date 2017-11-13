@@ -92,10 +92,8 @@ router.post('/email', authWrap, (req, res, next) => {
     res.boom.badRequest('invalid sender mail address');
     return;
   }
-    console.log(mail.from);
-
-  mailer.sendMail(mail, (err, mess) => {
-    console.log("Send Mail Callback");
+  
+  mailer.sendMail(mail, (err, mess) => {    
     if(err) {
       res.boom.badImplementation(); 
       return;

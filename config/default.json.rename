@@ -2,9 +2,10 @@
   "production": { 
     "smtp": {
       "host":"your_smtp_host",
+      "port":"your_smtp_port",
       "ssl":"true",
       "user":"your_smtp_account_username",
-      "passwd":"your_smtp_account_password"
+      "passwd":"your_smtp_account_password"      
     },
     "enableCors":true,
     "authUrl":"your_auth_service_url",

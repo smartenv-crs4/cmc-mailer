@@ -26,15 +26,14 @@ const mailerConfig = require('propertiesmanager').conf;
 const poolConfig = {
     pool: true,
     host: mailerConfig.smtp.host,
-    port: 465,
+    port: mailerConfig.smto.port,
     secure: Boolean(mailerConfig.smtp.ssl), // use SSL
     auth: {
         user:  mailerConfig.smtp.user,
         pass:  mailerConfig.smtp.passwd
     }
 };
-
-
+console.log(poolConfig);
     
 function sendMail (email, cb) {
 
