@@ -88,8 +88,8 @@ router.post('/email', authWrap, (req, res, next) => {
   }
 
 
-  if(!validator.isEmail(mail.from.address)) {
-    res.boom.badRequest('invalid sender mail address');
+  if(mail.from && !validator.isEmail(mail.from.address)) {
+    res.boom.badRequest('invalid sender mail address'); //gmail overwrite these info
     return;
   }
   
