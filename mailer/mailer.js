@@ -23,16 +23,20 @@
 const nodemailer = require('nodemailer');
 const mailerConfig = require('propertiesmanager').conf;
 
-const poolConfig = {
+let poolConfig = {
     pool: true,
     host: mailerConfig.smtp.host,
     port: mailerConfig.smtp.port,
-    secure: Boolean(mailerConfig.smtp.ssl), // use SSL
-    auth: {
+    secure: Boolean(mailerConfig.smtp.ssl) // use SSL
+}
+
+if(mailerConfig.smtp.user && mailerConfig.smtp.passwd && mailerConfig.smtp.user.length > 0 && mailerConfig.smtp.passwd.length > 0) {
+    poolConfig.auth = {
         user:  mailerConfig.smtp.user,
         pass:  mailerConfig.smtp.passwd
     }
-};
+}
+
 console.log(poolConfig);
     
 function sendMail (email, cb) {
@@ -59,7 +63,7 @@ function sendMail (email, cb) {
             let send = transporter.templateSender(template);
             send(mailOptions, {body: email.textBody},
                 function (err, info) {
-                    if (err) {
+                    if (err) {                        
                         console.log(err);
                         return cb(err, null);
                     }

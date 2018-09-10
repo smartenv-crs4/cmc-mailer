@@ -66,7 +66,10 @@ describe('--- Testing Mailer ---', () => {
 
 
   after((done) => {
-    init.stop(done);
+    init.stop(function() {
+      done();
+      process.exit()
+    });
   });
 
   describe('GET /', () => {
